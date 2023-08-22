@@ -7,6 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { Subject, Subscription, debounceTime } from 'rxjs';
+import { CountriesService } from 'src/app/countries/services/countries.service';
 
 @Component({
   selector: 'shared-search-box',
@@ -20,6 +21,9 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   @Output() public onValue = new EventEmitter<string>();
   @Output() public onDebounce = new EventEmitter<string>();
   @Input() public placeholder: string = '';
+  @Input() public initialValue: string = '';
+
+  constructor(private readonly countriesService: CountriesService) {}
 
   ngOnInit(): void {
     this.debouncerSubscription = this.debouncer
